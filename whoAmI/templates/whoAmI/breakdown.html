@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+<title>Data Breakdown</title>
+<script>
+//load stats data from the server
+</script>
+</head>
+<body>
+<h1>How We View Ourselves</h1>
+<h5>The current findings</h5>
+
+<div id="resultDesc">
+<!-- Details about prediction -->
+{% if accurate %}
+<p>Great, a successful prediction of your gender has been made based on how
+you describe yourself. Take a look at what the findings of the study "Who Am I?"
+ are so far.</p>
+{% else %}
+<p>Our algorithms have been unable to correctly predict your gender. Take a
+look at the findings of the study "Who Am I?" are so far.
+{% endif %}
+</div>
+<div id="topWords">
+<!-- Holds the data for the top words entered -->
+</div>
+<div id="usageWords">
+<!-- How the genders have used the words entered by participant -->
+</div>
+<div id="statistics">
+<p>In order to evaluate whether men and women do see themselves differently
+ some statistics have been implemented</p>
+ 
+</div>
+</body>
+</html>

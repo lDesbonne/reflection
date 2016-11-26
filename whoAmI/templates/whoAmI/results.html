@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+<title>The Prediction</title>
+<script type="text/javascript" src="/static/reflection/js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="/static/whoAmI/js/whoami.js"></script>
+</head>
+<body>
+<div id='result'>
+<h1>The Prediction</h1>
+{% if classified == 0 %}
+	<p>Are you Female?</p>
+	<br>
+	<span>
+	<button type="button" onclick="return correctPrediction({{word_notFound}},{{wordList}},{{classified}})">Yes</button>
+	<button type="button" onclick="return falsePrediction({{word_notFound}},{{wordList}},{{classified}})">No</button>
+	</span>
+{% elif classified == 1 %}
+	<p>Are you Male?</p>
+	<br>
+	<span>
+	<button type="button" onclick="return correctPrediction({{word_notFound}},{{wordList}},{{classified}})">Yes</button>
+	<button type="button" onclick="return falsePrediction({{word_notFound}},{{wordList}},{{classified}})">No</button>
+	</span>
+{% else %}
+	<p>Classification could not be determined because there was no statistical significance between
+	genders for the words chosen by yourself. Could you please select one of the options below.</p>
+	<br>
+	<button type="button" onclick="return malData({{word_notFound}},{{wordList}},{{classified}})">Are You Male?</button>
+	<button type="button" onclick="return femData({{word_notFound}},{{wordList}},{{classified}})">Are You Female?</button>
+	<button type="button" onclick="return noData({{word_notFound}},{{wordList}},{{classified}})">Prefer Not To Say</button>
+{% endif %}
+<br/>
+<!-- <script type="text/javascript">
+var data = {
+		"gender":{{classified}},
+		"wordlist":{{wordList}},
+		"exlist":{{word_notFound}},
+		"accurate":true
+}
+</script> -->
+<form>
+</form>
+
+
+</div>
+
+</body>
+</html>
