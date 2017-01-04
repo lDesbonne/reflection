@@ -31,7 +31,17 @@ look at the findings of the study "Who Am I?" are so far.
 <div id="statistics">
 <p>In order to evaluate whether men and women do see themselves differently
  some statistics have been implemented</p>
- 
+  
+{% if notFound.len > 0 %}
+<p>The following words have not been used in our test sample {{ notFound }} </p>
+{% endif %}
+
+<p>The current accuracy of our classifier is {{ accuracy }} %</p>
+
+<p>The top words used by women are {{ topF }}</p>
+<p>The top words used by men are {{ topM }}</p>
+
+
 </div>
 </body>
 </html>

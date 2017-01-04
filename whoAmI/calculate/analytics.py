@@ -11,9 +11,9 @@ from whoAmI.database import dbUtils, sqliteData
 from numpy import array
 
 #Query for top 10 words used by woman
-topFQuery = "SELECT * FROM whoAmI_word ORDER BY cMale DESC LIMIT 10"
+topFQuery = "SELECT * FROM whoAmI_word ORDER BY cFem DESC LIMIT 10"
 #Query for top 10 words used by men
-topMQuery = "SELECT * FROM whoAmI_word ORDER BY cFem DESC LIMIT 10"
+topMQuery = "SELECT * FROM whoAmI_word ORDER BY cMale DESC LIMIT 10"
 #Holds up to 100 of the previous guesses
 guesses = []
 

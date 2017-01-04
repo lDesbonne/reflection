@@ -45,34 +45,38 @@ def breakdown(request):
     data = json.loads(data_decode)
     wordsUsed = data['wordlist']
     notFound = data['exlist']
-    nf = [] # Words not found in the database
     
-    # Generate list of words not in the database
-    for i in range(len(notFound)):
-        if (notFound[i] == "NotPresent"):
-            nf.append(wordsUsed[i])
+    #Constructs the original dataset
+    def initialData(exlist,usedWords):
+        words = []
+        for word in usedWords:
+            if word != "NotPresent":
+                words.append(word)
+        for w in exlist:
+            words.append(w)
+        return words
     
     # Evaluate whether the words can be submitted to the database
     numDoc = sqliteData.numberDocs("whoAmI")
     if(numDoc < 1000):
         if(data['accurate'] != "noData"):
             if(data['gender'] == "Female"):
-                dbUtils.saveDocument(wordsUsed, 0)
+                dbUtils.saveDocument(initialData(notFound, wordsUsed), 0)
             elif(data['gender'] == "Male"):
-                dbUtils.saveDocument(wordsUsed, 1)
+                dbUtils.saveDocument(initialData(notFound, wordsUsed), 1)
     
     # Retrieve statistics info for the words submitted
     whoStats = WhoAmIStats(wordsUsed)
     #TODO create an accuracy stat
     success = 1
     if not data['accurate']:
-        succuess = 0
+        success = 0
     accuracy = whoStats.calcSuccess(success)
     
     # Retrieve top 10 words by gender
             
     context = {
-             'notFound':nf,
+             'notFound':notFound,
              'accurate':data['accurate'],
              'entries':numDoc,
              'accuracy':accuracy,
