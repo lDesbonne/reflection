@@ -45,15 +45,31 @@ def numberDocs(docuname):
         study = models.ResearchQuery.objects.get(study_title = docuname)
         return study.num_docs
     except ObjectDoesNotExist:
+        # TODO improve the error handling
+        return 0
+    
+def docSuccessRate(docuname):
+    try:
+        study = models.ResearchQuery.objects.get(study_title = docuname)
+        return study.successRate()
+    except ObjectDoesNotExist:
         return 0
 
-def newDoc(docuname):
-    doc = models.ResearchQuery(study_title = docuname, num_docs = 1)
+def newDoc(docuname, success = False):
+    
+    if success:
+        doc = models.ResearchQuery(study_title = docuname, num_docs = 1, successes = 1, fails = 0)
+    else:
+        doc = models.ResearchQuery(study_title = docuname, num_docs = 1, successes = 0, fails = 1)
     doc.save()
 
-def updateDoc(docuname):
+def updateDoc(docuname, success):
     doc = models.ResearchQuery.objects.get(study_title = docuname)
     doc.num_docs += 1
+    if success:
+        doc.successes += 1
+    else:
+        doc.fails += 1
     doc.save()
 
 def updateWord(descWord, classified):

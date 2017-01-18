@@ -61,17 +61,12 @@ def breakdown(request):
     if(numDoc < 1000):
         if(data['accurate'] != "noData"):
             if(data['gender'] == "Female"):
-                dbUtils.saveDocument(initialData(notFound, wordsUsed), 0)
+                dbUtils.saveDocument(initialData(notFound, wordsUsed), 0, data['accurate'])
             elif(data['gender'] == "Male"):
-                dbUtils.saveDocument(initialData(notFound, wordsUsed), 1)
+                dbUtils.saveDocument(initialData(notFound, wordsUsed), 1, data['accurate'])
     
     # Retrieve statistics info for the words submitted
     whoStats = WhoAmIStats(wordsUsed)
-    #TODO create an accuracy stat
-    success = 1
-    if not data['accurate']:
-        success = 0
-    accuracy = whoStats.calcSuccess(success)
     
     # Retrieve top 10 words by gender
             
@@ -79,7 +74,7 @@ def breakdown(request):
              'notFound':notFound,
              'accurate':data['accurate'],
              'entries':numDoc,
-             'accuracy':accuracy,
+             'accuracy':whoStats.successRate,
              'topF':whoStats.topFWords,
              'topM':whoStats.topMWords,
              }

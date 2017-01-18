@@ -8,15 +8,17 @@ regarding the "Who Am I?" project.
 '''
 
 from whoAmI.database import dbUtils, sqliteData
+from whoAmI import models
 from numpy import array
 
 #Query for top 10 words used by woman
-topFQuery = "SELECT * FROM whoAmI_word ORDER BY cFem DESC LIMIT 10"
+topFQuery = "SELECT * FROM whoAmI_word WHERE cFem != 0 ORDER BY cFem DESC LIMIT 10"
 #Query for top 10 words used by men
-topMQuery = "SELECT * FROM whoAmI_word ORDER BY cMale DESC LIMIT 10"
+topMQuery = "SELECT * FROM whoAmI_word WHERE cMale != 0 ORDER BY cMale DESC LIMIT 10"
 #Holds up to 100 of the previous guesses
 guesses = []
 
+#TODO finish implementing accuracy updates.
 class WhoAmIStats(object):
     
     def __init__(self,wordlist = []):
@@ -41,7 +43,7 @@ class WhoAmIStats(object):
         return words
             
     #Calculates the success rate based on the 
-    def calcSuccess(self,success=-1):
+    def calcSuccessOld(self,success=-1):
         if success > -1 and success <= 1:
             if len(guesses) < 100:
                 guesses.append(success)
@@ -55,6 +57,13 @@ class WhoAmIStats(object):
             
         else:
             return 0
+    
+    def calcSuccess(self):
+        # Query the who am i research study
+        researchQ = models.ResearchQuery.objects.get(study_title = 'whoAmI')
+        return round(researchQ.successes/(researchQ.fails + researchQ.successes)*100,1)
+            
+            
     
     def getUsedWords(self,wrds):
         wordsUsed = []

@@ -17,9 +17,15 @@ class Word(models.Model):
 class ResearchQuery(models.Model):
     study_title = models.CharField(max_length = 200, primary_key=True)
     num_docs = models.IntegerField(default=0)
+    successes = models.IntegerField(default=0)
+    fails = models.IntegerField(default=0)
     
     def __str__(self):
         return self.study_title
     
     def details(self):
         return "{title:"+self.study_title+",number of entries:"+str(self.num_docs)+"}"
+    
+    def successRate(self):
+        return self.successes/(self.successes + self.fails)*100
+        
