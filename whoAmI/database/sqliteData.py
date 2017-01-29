@@ -8,8 +8,9 @@ Module contains methods compatible with sqlite3
 
 from whoAmI import models
 from django.core.exceptions import ObjectDoesNotExist
+
 #Retrieves word from the naivePredictor_word table
-def queryWord(descWord):
+def queryWord(descWord,study_key):
     try:
         dbWord = models.Word.objects.get(word=descWord)
         if dbWord != None:
@@ -29,7 +30,7 @@ def queryDoc(docName):
         return False
     
 #Adds a new word to the naivePredictor_word table
-def newWord(descWord, classified):
+def newWord(descWord, classified, study_key):
     if classified is 1:
         dbWord = models.Word(word = descWord,cMale=1)
         dbWord.save()

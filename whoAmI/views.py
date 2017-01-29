@@ -8,6 +8,8 @@ from whoAmI.database import dbUtils, sqliteData
 from whoAmI.calculate.analytics import WhoAmIStats
 import json
 
+
+
 def predictGender(request):
     # Retrieve the prediction and other info
     wordList = []
