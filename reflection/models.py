@@ -18,6 +18,6 @@ class TopicAreas(models.Model):
 class ResearchProposals(models.Model):
     proposal = models.CharField(max_length = 200, primary_key=True)
     detail = models.TextField()
-    topic = models.CharField(max_length = 200)
+    topic = models.ForeignKey(TopicAreas, on_delete=models.CASCADE)
     status = models.BooleanField("approval_status", default = False)
     
