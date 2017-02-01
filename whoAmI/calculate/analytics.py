@@ -26,7 +26,7 @@ class WhoAmIStats(object):
             self.topFWords = self.__getWordlist(topFQuery)
             self.successRate = self.calcSuccess()
             #self.confidence = 0
-            self.words = self.getUsedWords(wordlist)
+            self.words = self.getUsedWords(wordlist, study_key)
         
     # TODO Calculates the confidence of the current prediction
     def __calcConfidence(self):
@@ -69,10 +69,10 @@ class WhoAmIStats(object):
             
             
     
-    def getUsedWords(self,wrds):
+    def getUsedWords(self,wrds, study):
         wordsUsed = []
         for word in wrds:
-            wordsUsed.append(sqliteData.getWord(word))
+            wordsUsed.append(sqliteData.getWord(word,study))
         
         return wordsUsed
     

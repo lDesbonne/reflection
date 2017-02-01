@@ -7,8 +7,11 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from . import utilities
+from reflection.proposal import approvalProcessing
 
 def home(request):
+    # Initialize global data about running projects
+    approvalProcessing.initGlobalData()
     return render(request,'reflection/home.html')
 
 def contribute(request):

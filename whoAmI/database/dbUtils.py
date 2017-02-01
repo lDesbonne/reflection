@@ -12,18 +12,18 @@ from django.db import connection
 
 #databaseName = 'db.sqlite3'
 
-def saveDocument(wordList, classified, success = False):
+def saveDocument(wordList, classified, researchQuery, success = False):
     for word in wordList:
         if sqliteData.queryWord(word):
-            sqliteData.updateWord(word, classified)
+            sqliteData.updateWord(word, classified, researchQuery)
         else:
-            sqliteData.newWord(word, classified)
+            sqliteData.newWord(word, classified, researchQuery)
     
     # Update document number for whoAmI
-    if sqliteData.queryDoc("whoAmI"):
-        sqliteData.updateDoc("whoAmI", success)
+    if sqliteData.queryDoc(researchQuery):
+        sqliteData.updateDoc(researchQuery, success)
     else:
-        sqliteData.newDoc("whoAmI", success)
+        sqliteData.newDoc(researchQuery, success)
     
 def synonymDetection():
     # TODO create method for synonym detection
