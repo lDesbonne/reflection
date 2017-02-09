@@ -15,32 +15,12 @@ more creative you are the greater the findings and the more we can learn and the
 greater the value.
 </p>
 </div>
-<div id="subjectMatter">
-<p>Compulsory fields are marked with an *</p>
-<h5>Hypothesis or Question *</h5>
-<p>This represents the main aim of the investigation it should concise and easy
-to understand</p>
-<input type="text">
-<br>
-<h5>Proposed study title</h5>
-<p>A short catchy name that reflects the theme of the study</p>
-<input type="text">
-<br>
-<h5>Details</h5>
-<p>In the space below describe any parameters that you believe should be investigated
- in order to achieve the study goals. If you can, detail what approaches you would 
- like to be taken</p>
-<input type="text">
-<br>
-<h5>Contact Information</h5>
-<p>If you like you can give us your e-mail to contact you. We will use this to inform
-you if your study is going to be launched, and to inform you of how we are going about
-it.</p>
-<input type="email"> 
+<div id="concept-form">
+<form action="{% url 'reflection:proposal' %}" method="post">
+{% csrf_token %}
+{{ researchForm }}
+<input type="submit" value="Submit Concept">
+</form>
 </div>
-<div id="summary">
-<button onclick="{% url reflection:proposals}">Submit Concept</button>
-</div>
-
 </body>
 </html>

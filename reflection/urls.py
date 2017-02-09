@@ -17,9 +17,10 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from . import views as refl
 
+# TODO add topic area homepages
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^reflection/home/',refl.home, name='home'),
     url(r'^reflection/proposal/',refl.proposal, name='proposal'),
-    url(r'^reflection/whoami/',include('whoAmI.urls')),
+    url(r'^reflection/genPerGen/',include('genPerGen.urls')),
 ]

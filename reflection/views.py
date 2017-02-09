@@ -8,6 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.http import Http404
 from . import utilities
 from reflection.proposal import approvalProcessing
+from reflection.widgets import businessForms as bForms
 
 def home(request):
     # Initialize global data about running projects
@@ -17,7 +18,14 @@ def home(request):
 def contribute(request):
     return render(request,'reflection/contribute.html')
 
-def proposal(request, prop):
-    persisted = utilities.storeProposal(prop)
+def newResearchConcept(request):
+    conceptForm = bForms.NewResearchForm()
+    return render(request, 'reflection/concepts.html', {'researchForm':conceptForm})
+
+def proposal(request):
+    # TODO retrive form data and persist to the database
+    formData = bForms.NewResearchForm(request.POST)
+    
+    persisted = utilities.storeProposal()
     return persisted
     
