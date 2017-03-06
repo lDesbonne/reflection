@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class WhoAmIConfig(AppConfig):
+class GenPerGenConfig(AppConfig):
     name = 'genPerGen'

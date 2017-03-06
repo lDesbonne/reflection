@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'genPerGen.apps.WhoAmIConfig',
+    'genPerGen.apps.GenPerGenConfig',
     'reflection.apps.ReflectionConfig',
 ]
 

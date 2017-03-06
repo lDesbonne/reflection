@@ -16,7 +16,7 @@ greater the value.
 </p>
 </div>
 <div id="concept-form">
-<form action="{% url 'reflection:proposal' %}" method="post">
+<form action="/reflection/proposal" method="post">
 {% csrf_token %}
 {{ researchForm }}
 <input type="submit" value="Submit Concept">

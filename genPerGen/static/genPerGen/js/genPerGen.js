@@ -3,7 +3,7 @@ function correctPrediction(notfound,wordList,gender){
 	var csrftoken = getCookie('csrftoken');
 	var request = new XMLHttpRequest();
 	request.open("POST",
-			"/reflection/whoami/breakdown/");
+			"/reflection/genPerGen/breakdown/");
 	request.setRequestHeader("Content-Type","application/json; charset=utf-8");
 	request.setRequestHeader("X-CSRFToken", csrftoken);
 	
@@ -24,9 +24,7 @@ function correctPrediction(notfound,wordList,gender){
 		if (request.readyState === 4 && callback)
 			callback(request);
 	};
-		
 	request.send(JSON.stringify(data));
-		
 }
 
 
@@ -35,7 +33,7 @@ function falsePrediction(notfound,wordList,gender){
 	var csrftoken = getCookie('csrftoken');
 	var request = new XMLHttpRequest();
 	request.open("POST",
-	"/reflection/whoami/breakdown/");
+	"/reflection/genPerGen/breakdown/");
 	request.setRequestHeader("Content-Type","application/json; charset=utf-8");
 	request.setRequestHeader("X-CSRFToken", csrftoken);
 	
@@ -64,7 +62,7 @@ function malData(notFound,wordList,gender){
 	var csrftoken = getCookie('csrftoken');
 	var request = new XMLHttpRequest();
 	request.open("POST",
-			"/reflection/whoami/breakdown/");
+			"/reflection/genPerGen/breakdown/");
 	request.setRequestHeader("Content-Type","application/json; charset=utf-8");
 	request.setRequestHeader("X-CSRFToken",csrftoken);
 	
@@ -88,7 +86,7 @@ function femData(notFound,wordList){
 	var csrftoken = getCookie('csrftoken');
 	var request = new XMLHttpRequest();
 	request.open("POST",
-			"/reflection/whoami/breakdown/");
+			"/reflection/genPerGen/breakdown/");
 	request.setRequestHeader("Content-Type","application/json; charset=utf-8");
 	request.setRequestHeader("X-CSRFToken",csrftoken);
 	
@@ -111,7 +109,7 @@ function noData(notFound,wordList){
 	var csrftoken = getCookie('csrftoken');
 	var request = new XMLHttpRequest();
 	request.open("POST",
-			"/reflection/whoami/breakdown/");
+			"/reflection/genPerGen/breakdown/");
 	request.setRequestHeader("Content-Type","application/json; charset=utf-8");
 	request.setRequestHeader("X-CSRFToken",csrftoken);
 	

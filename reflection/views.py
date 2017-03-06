@@ -9,12 +9,15 @@ from django.http import Http404
 from . import utilities
 from reflection.proposal import approvalProcessing
 from reflection.widgets import businessForms as bForms
+import json
 
 def home(request):
     # Initialize global data about running projects
-    approvalProcessing.initGlobalData()
+    if (not approvalProcessing.initialized):
+        approvalProcessing.initGlobalData()
     return render(request,'reflection/home.html')
 
+#TODO perhaps remove from here
 def contribute(request):
     return render(request,'reflection/contribute.html')
 
@@ -22,10 +25,13 @@ def newResearchConcept(request):
     conceptForm = bForms.NewResearchForm()
     return render(request, 'reflection/concepts.html', {'researchForm':conceptForm})
 
-def proposal(request):
-    # TODO retrive form data and persist to the database
-    formData = bForms.NewResearchForm(request.POST)
+def submitProposal(request):
+    #The presence of & may be causing parsing issues from the client
+#     request_decode = request.body.decode('utf-8')
+    #formData = bForms.NewResearchForm(request.POST)
     
-    persisted = utilities.storeProposal()
-    return persisted
+    if (utilities.storeProposal(request.POST)):
+        return render(request, 'plugins/messageBox.html', {'message':"Successfully submitted proposal"})
+    else:
+        return render(request, 'plugins/messageBox.html', {'message':"Failed to submit proposal"})
     
