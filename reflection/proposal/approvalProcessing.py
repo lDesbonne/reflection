@@ -95,7 +95,7 @@ def evaluateResearchQuery(question, qAlias, qDetail, topic):
     else:
         # Check in the database for this question in non approved status
         try:
-            proposals = ResearchProposals.objects.filter(topic=TopicAreas.objects.get(topic=topic))
+            proposals = ResearchProposals.objects.filter(topic=TopicAreas.objects.get(topic_area=topic))
             for proposal in proposals:
                 if proposal.proposal == question:
                     newStudy = False
