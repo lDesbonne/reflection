@@ -17,8 +17,14 @@ def isEnglishWord(word):
 
 #Saves proposals
 def storeProposal(proposal):
+    #TODO improve the information returned from the save process
+    #topicExists = "Saved with existing topic"
+    #queryExists = "Query already exists in the database"
     #Check if topic exists
-    if approvalProcessing.evaluateTopic(proposal['topic_area'], proposal['topic_detail'], proposal['topic_alias']) and approvalProcessing.evaluateResearchQuery(proposal['question'], proposal['question_alias'], proposal['question_detail'], proposal['topic_area']):
+    topicSaved = approvalProcessing.evaluateTopic(proposal['topic_area'], proposal['topic_detail'], proposal['topic_alias']) 
+    if approvalProcessing.evaluateResearchQuery(proposal['question'], proposal['question_alias'], proposal['question_detail'], proposal['topic_area']):
+        if topicSaved:
+            return True
         return True
     else:
         return False

@@ -25,9 +25,9 @@ initialized = False
 def initGlobalData():
     # Get all approved topic areas
     try:
-        approvedAreas = TopicAreas.objects.get(status=True)
+        approvedAreas = TopicAreas.objects.filter(status=True)
         
-        approvedStudies = ResearchProposals.objects.get(status=True)
+        approvedStudies = ResearchProposals.objects.filter(status=True)
         
         for area in approvedAreas:
             liveTopicAreas.append(area.topic_area)
@@ -50,7 +50,7 @@ def initGlobalData():
         initialized = True
 
 def newTopic(title, detail, alias=None, status=False):
-    topic = TopicAreas(title, detail, status, alias)
+    topic = TopicAreas(topic_area=title, detail=detail, status=status, alias=alias)
     topic.save()
 
 def evaluateTopic(title, detail, alias):
@@ -66,7 +66,9 @@ def evaluateTopic(title, detail, alias):
         try:
             TopicAreas.objects.get(topic_area=title)
             novelTopic = False
-        except Exception:
+            #Topic already exists in the database
+            return True
+        except TopicAreas.DoesNotExist:
             try:
                 newTopic(title, detail, alias)
                 return True
@@ -76,14 +78,15 @@ def evaluateTopic(title, detail, alias):
             
 def newResearchQuery(title, detail, topic, status=False, alias=None):
     # check that the topic exists
-    if TopicAreas.objects.get(topic_area=topic) != None:
-        res = ResearchProposals(title, detail, topic, status, alias)
+    associatedTopic = TopicAreas.objects.get(topic_area=topic)
+    if associatedTopic != None:
+        res = ResearchProposals(proposal=title, detail=detail, topic=associatedTopic, status=status, alias=alias)
         res.save()
 
 def evaluateResearchQuery(question, qAlias, qDetail, topic):
     newStudy = True
     # Check to see if the question exists for the topic
-    if liveTopicsStudies[topic] != None:
+    if liveTopicsStudies.get(topic) != None:
         associatedStudies = liveTopicsStudies[topic]
         for aStudy in associatedStudies:
             if aStudy == question:
@@ -92,22 +95,20 @@ def evaluateResearchQuery(question, qAlias, qDetail, topic):
     else:
         # Check in the database for this question in non approved status
         try:
-            proposals = ResearchProposals.objects.get(topic=topic)
+            proposals = ResearchProposals.objects.filter(topic=TopicAreas.objects.get(topic=topic))
             for proposal in proposals:
                 if proposal.proposal == question:
                     newStudy = False
-                    return True
-            
+                    return newStudy
+        except Exception:       
             if newStudy:
                 try:    
-                    newResearchQuery(question, qDetail, topic, None, qAlias)   
-                    return True
+                    newResearchQuery(title=question, detail=qDetail, topic=topic, alias=qAlias)   
+                    return newStudy
                 except Exception:
                     # Failed to process new query
                     return False
-        except Exception:
-            #Topic doesn't exist
-            return False                
+                       
 
 def approveTopic(topic):
     if TopicAreas.objects.get(topic_area=topic) != None:

@@ -24,7 +24,7 @@ class ResearchQuery(models.Model):
         
 
 class Word(models.Model):
-    word = models.CharField(max_length = 50, primary_key=True)
+    word = models.CharField(max_length = 50)
     #Initialised to 1 to avoid multiply by 0 in naive bayes
     cFem = models.IntegerField("classified Female", default=0)
     cMale = models.IntegerField("classified Male", default=0)

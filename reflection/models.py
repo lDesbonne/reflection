@@ -10,14 +10,14 @@ from django.db.models.deletion import CASCADE
 
 # Topic area suggestions will be placed here for approval
 class TopicAreas(models.Model):
-    topic_area = models.CharField(max_length = 200, primary_key = True)
+    topic_area = models.CharField(max_length = 200)
     detail = models.TextField()
     status = models.BooleanField("approval_status", default = False)
     alias = models.CharField(max_length = 20, unique = True)
 
 # Research proposals will be placed here for approval
 class ResearchProposals(models.Model):
-    proposal = models.CharField(max_length = 200, primary_key=True)
+    proposal = models.CharField(max_length = 200)
     detail = models.TextField()
     topic = models.ForeignKey(TopicAreas, on_delete=models.CASCADE)
     status = models.BooleanField("approval_status", default = False)

@@ -23,7 +23,9 @@ def contribute(request):
 
 def newResearchConcept(request):
     conceptForm = bForms.NewResearchForm()
-    return render(request, 'reflection/concepts.html', {'researchForm':conceptForm})
+    return render(request, 'reflection/concepts.html', {'researchForm':conceptForm,
+                                                        'liveTopics':approvalProcessing.liveTopicAreas, 
+                                                        'existingQuestions':approvalProcessing.liveStudies})
 
 def submitProposal(request):
     #The presence of & may be causing parsing issues from the client
@@ -33,5 +35,6 @@ def submitProposal(request):
     if (utilities.storeProposal(request.POST)):
         return render(request, 'plugins/messageBox.html', {'message':"Successfully submitted proposal"})
     else:
+        #TODO improve the failure message
         return render(request, 'plugins/messageBox.html', {'message':"Failed to submit proposal"})
     
