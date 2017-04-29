@@ -28,13 +28,12 @@ def newResearchConcept(request):
                                                         'existingQuestions':approvalProcessing.liveStudies})
 
 def submitProposal(request):
-    #The presence of & may be causing parsing issues from the client
-#     request_decode = request.body.decode('utf-8')
-    #formData = bForms.NewResearchForm(request.POST)
-    
     if (utilities.storeProposal(request.POST)):
         return render(request, 'plugins/messageBox.html', {'message':"Successfully submitted proposal"})
     else:
         #TODO improve the failure message
         return render(request, 'plugins/messageBox.html', {'message':"Failed to submit proposal"})
     
+#Will allow someone to approve topics and questions
+def adminApprovalDashboard(request):
+    return render(request, 'reflection/currentprojectdata.html')

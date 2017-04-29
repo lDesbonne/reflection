@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Project Review Page</title>
+<meta charset=utf-8>
+<link href="/static/reflection/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="Title">
+<h1>Project Review Page</h1>
+<br>
+<div class="container-fluid">
+<div class="row">
+<div id="Topics" class="col-sm-6">
+<!-- Populate with topics in the db -->
+<h3>Topics</h3>
+<br>
+<div class="row">
+<div id="LiveTopics" class="col-sm-6 refChart1">
+<!-- Will have a chart displaying all the live topics -->
+<!-- Probably use something from D3 -->
+</div>
+<div id="PendingTopics" class="col-sm-6 refChart2">
+<!-- Will have a chart displaying all non live topics -->
+<!-- Probably something from D3 -->
+</div>
+</div>
+<div class="row">
+<datalist id="searchTopic" class="col-sm-4"></datalist>
+<input type="text" value="Will display data about the topic" class="col-sm-8">
+</div>
+</div>
+<div id="Questions" class="col-sm-6">
+<!-- Populate with questions in the db -->
+<h3>Questions</h3>
+<br>
+<div class="row">
+<div id="LiveQuestions" class="col-sm-6">
+<!-- Will have a chart displaying all the live questions -->
+<!-- Probably something from D3 -->
+</div>
+<div id="PendingQuestions" class="col-sm-6">
+<!-- Will have a chart displaying non live questions -->
+<!-- Probably something from D3 -->
+</div>
+</div>
+<div class="row">
+<datalist id="searchQuestion" class="col-sm-4"></datalist>
+<input type="text" value="Will data about the question" class="col-sm-8"></input>
+</div>
+</div>
+</div>
+<div class="row">
+<input type="checkbox" value="Show active topics" class="col-sm-3">
+<input type="checkbox" value="Show non approved topics" class="col-sm-3">
+<input type="checkbox" value="Show active questions" class="col-sm-3">
+<input type="checkbox" value="Show non approved questions" class="col-sm-3">
+</div>
+</div>
+</div>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="/static/reflection/js/jquery-3.1.1.js" type="text/javascript"></script>
+<script src="/static/reflection/js/bootstrap.js" type="text/javascript"></script>
+<script src="/static/reflection/js/refChart1.js" type="text/javascript"></script>
+<script src="/static/reflection/js/refChart2.js" type="text/javascript"></script>
+</body>
+</html>
