@@ -28,7 +28,7 @@ var refChart1 = d3.select(".refChart1").append("svg")
     .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")")
     .attr("align","left");
 
-d3.json("/static/reflection/data/exampleData.json", function(error, root) {
+d3.json("/static/reflection/data/dataMock.json", function(error, root) {
   if (error) throw error;
   
   root = d3.hierarchy(root);
