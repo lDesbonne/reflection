@@ -21,30 +21,28 @@ var arc = d3.arc()
     .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
 
 
-var refChart2 = d3.select(".refChart2").append("svg")
+var liveChart = d3.select("#liveChart").append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")")
-    .attr("align","right");
+    .attr("align","left");
 
-d3.json("/static/reflection/data/exampleData.json", function(error, root) {
-  if (error) throw error;
-  
-  root = d3.hierarchy(root);
+(function() {
+  root = d3.hierarchy("{{liveData}}");
   root.sum(function(d) { return d.size; });
-  refChart2.selectAll("path")
+  liveChart.selectAll("path")
       .data(partition(root).descendants())
     .enter().append("path")
       .attr("d", arc)
       .style("fill", function(d) { return color((d.children ? d : d.parent).data.name); })
-      .on("click", clickRefChart2)
+      .on("click", clickLiveChart)
     .append("title")
       .text(function(d) { return d.data.name + "\n" + formatNumber(d.value); });
-});
+})();
 
-function clickRefChart2(d) {
-  refChart2.transition()
+function clickLiveChart(d) {
+  liveChart.transition()
       .duration(750)
       .tween("scale", function() {
         var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),

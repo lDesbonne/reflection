@@ -9,7 +9,8 @@ from django.http import Http404
 from . import utilities
 from reflection.proposal import approvalProcessing
 from reflection.widgets import businessForms as bForms
-import json
+from reflection.proposal.AdministrationServices import ApprovalDataBuilder
+from reflection.proposal import AdminUtilities
 
 def home(request):
     # Initialize global data about running projects
@@ -36,4 +37,10 @@ def submitProposal(request):
     
 #Will allow someone to approve topics and questions
 def adminApprovalDashboard(request):
-    return render(request, 'reflection/currentprojectdata.html')
+    live = ApprovalDataBuilder('Live').build().dataTree
+    pending = ApprovalDataBuilder('Pending').build().dataTree
+    return render(request, 
+                  'reflection/currentprojectdata.html', 
+                  {'liveData': AdminUtilities.approvalInfoToJsonString(live),
+                   'pendingData': AdminUtilities.approvalInfoToJsonString(pending)})
+    

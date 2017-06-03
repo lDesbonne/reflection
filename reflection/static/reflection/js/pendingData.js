@@ -21,30 +21,28 @@ var arc = d3.arc()
     .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
 
 
-var refChart1 = d3.select(".refChart1").append("svg")
+var pendingChart = d3.select("#PendingData").append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
     .attr("transform", "translate(" + width / 2 + "," + (height / 2) + ")")
-    .attr("align","left");
+    .attr("align","right");
 
-d3.json("/static/reflection/data/dataMock.json", function(error, root) {
-  if (error) throw error;
-  
-  root = d3.hierarchy(root);
+(function() {
+  root = d3.hierarchy("{{pendingData}}");
   root.sum(function(d) { return d.size; });
-  refChart1.selectAll("path")
+  pendingChart.selectAll("path")
       .data(partition(root).descendants())
     .enter().append("path")
       .attr("d", arc)
       .style("fill", function(d) { return color((d.children ? d : d.parent).data.name); })
-      .on("click", click)
+      .on("click", clickPendingChart)
     .append("title")
       .text(function(d) { return d.data.name + "\n" + formatNumber(d.value); });
-});
+})();
 
-function click(d) {
-  refChart1.transition()
+function clickPendingChart(d) {
+  pendingChart.transition()
       .duration(750)
       .tween("scale", function() {
         var xd = d3.interpolate(x.domain(), [d.x0, d.x1]),
