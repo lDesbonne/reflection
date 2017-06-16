@@ -3,13 +3,10 @@ Created on 19 Oct 2016
 
 @author: Lennon
 '''
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
-from django.http import Http404
+from django.shortcuts import render
 from . import utilities
-from reflection.proposal import approvalProcessing
+from reflection.proposal import approvalProcessing, AdministrationServices
 from reflection.widgets import businessForms as bForms
-from reflection.proposal.AdministrationServices import ApprovalDataBuilder
 from reflection.proposal import AdminUtilities
 
 def home(request):
@@ -37,8 +34,8 @@ def submitProposal(request):
     
 #Will allow someone to approve topics and questions
 def adminApprovalDashboard(request):
-    live = ApprovalDataBuilder('Live').build().dataTree
-    pending = ApprovalDataBuilder('Pending').build().dataTree
+    live = AdministrationServices.approvalDataBuilder('Live')
+    pending = AdministrationServices.approvalDataBuilder('Pending')
     return render(request, 
                   'reflection/currentprojectdata.html', 
                   {'liveData': AdminUtilities.approvalInfoToJsonString(live),
