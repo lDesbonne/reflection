@@ -24,8 +24,6 @@ def approvalInfoToJsonString(approvalData):
         #Generate an approval data template
         return approvalDataJsonTemplate.format(name = approvalData.name, list = parentDataList)
         
-        
-        
     else:
         raise Exception("Object must be of type ProjectDataStructure")
         

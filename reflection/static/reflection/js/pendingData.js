@@ -29,7 +29,7 @@ var pendingChart = d3.select("#PendingData").append("svg")
     .attr("align","right");
 
 (function() {
-  root = d3.hierarchy("{{pendingData}}");
+  var root = d3.hierarchy(dormantData);	
   root.sum(function(d) { return d.size; });
   pendingChart.selectAll("path")
       .data(partition(root).descendants())

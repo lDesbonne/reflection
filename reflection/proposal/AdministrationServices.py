@@ -46,7 +46,7 @@ def approvalDataBuilder(initialiser):
     if not validInitializer:
         raise Exception("Initializer: " + initialiser + " invalid")
         
-        # Create parent data holder
+    # Create parent data holder
     dataTree = ProjectDataStructure(name=initialiser + ' Topics')
     
     # Get all the names of the topics using the active flag

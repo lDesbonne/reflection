@@ -8,6 +8,8 @@ from . import utilities
 from reflection.proposal import approvalProcessing, AdministrationServices
 from reflection.widgets import businessForms as bForms
 from reflection.proposal import AdminUtilities
+import json
+from django.http import JsonResponse
 
 def home(request):
     # Initialize global data about running projects
@@ -34,10 +36,15 @@ def submitProposal(request):
     
 #Will allow someone to approve topics and questions
 def adminApprovalDashboard(request):
+    return render(request, 'reflection/currentprojectdata.html', {
+                                                                  'liveData': liveAdministrationData(),
+                                                                  'pendingData': pendingAdministrationData()})
+
+def liveAdministrationData():
     live = AdministrationServices.approvalDataBuilder('Live')
+    return AdminUtilities.approvalInfoToJsonString(live)
+
+def pendingAdministrationData():
     pending = AdministrationServices.approvalDataBuilder('Pending')
-    return render(request, 
-                  'reflection/currentprojectdata.html', 
-                  {'liveData': AdminUtilities.approvalInfoToJsonString(live),
-                   'pendingData': AdminUtilities.approvalInfoToJsonString(pending)})
-    
+    return AdminUtilities.approvalInfoToJsonString(pending)
+

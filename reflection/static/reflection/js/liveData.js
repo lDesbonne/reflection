@@ -21,7 +21,7 @@ var arc = d3.arc()
     .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
 
 
-var liveChart = d3.select("#liveChart").append("svg")
+var liveChart = d3.select("#LiveData").append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
@@ -29,7 +29,7 @@ var liveChart = d3.select("#liveChart").append("svg")
     .attr("align","left");
 
 (function() {
-  root = d3.hierarchy("{{liveData}}");
+  var root = d3.hierarchy(activeData);
   root.sum(function(d) { return d.size; });
   liveChart.selectAll("path")
       .data(partition(root).descendants())
