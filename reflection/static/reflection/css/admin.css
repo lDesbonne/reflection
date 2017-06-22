@@ -1,0 +1,26 @@
+h3 {
+	text-align:center
+}
+h1 {
+	text-align:center
+}
+.sunChart {
+	margin-right:auto;
+	margin-left:auto;
+	text-align:center
+}
+#detLabel {
+	float: right
+}
+#searchContainer {
+	text-align: center
+}
+.actionButton {
+	text-align: center
+}
+#searchLive {
+	float: right
+}
+#searchI {
+	float: right
+}
