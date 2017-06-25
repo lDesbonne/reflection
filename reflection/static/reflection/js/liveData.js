@@ -38,10 +38,20 @@ var liveChart = d3.select("#LiveData").append("svg")
       .style("fill", function(d) { return color((d.children ? d : d.parent).data.name); })
       .on("click", clickLiveChart)
     .append("title")
-      .text(function(d) { return d.data.name + "\n" + formatNumber(d.value); });
+      .text(function(d) { return d.data.name})
+      .style("font-size", "8px");
 })();
 
 function clickLiveChart(d) {
+	if (d.data.detail != "root") {
+		document.getElementById("searchData").value = d.data.name;
+		 if (d.data.detail) {
+			document.getElementById("information").innerHTML = d.data.detail;
+		 } else {
+			document.getElementById("information").innerHTML = "No Information";
+		 }
+	}
+	
   liveChart.transition()
       .duration(750)
       .tween("scale", function() {

@@ -11,26 +11,28 @@ from reflection.models import ResearchProposals
 valididInitializationValues = ['Live', 'Pending']
         
 class ApprovalData:
-    def __init__(self, name):
+    def __init__(self, name, information):
         self.name = name
         self.children = []
+        self.information = information
     
     def __str__(self):
-        return '{"name":' + self.name + ',"children":' + self.children + '}'
+        return '{"name":' + self.name + ',"children":' + self.children + ', "detail":' + self.information + '}'
             
         
 # Meta data should be added here to provide supplementary info
 class ApprovalInfo:
-    def __init__(self, name):
+    def __init__(self, name, information):
         self.name = name
         self.size = "1"
+        self.information = information
     
     def __str__(self):
-        return '{"name":"' + self.name + '","size":' + self.size + '}'
+        return '{"name":"' + self.name + '","size":' + self.size + ', "detail":"' + self.information + '"}'
         
 class ProjectDataStructure(ApprovalData):
-    def __init__(self, name):
-        ApprovalData.__init__(self, name)     
+    def __init__(self, name, information):
+        ApprovalData.__init__(self, name, information)     
 
 def approvalDataBuilder(initialiser):
     
@@ -47,7 +49,7 @@ def approvalDataBuilder(initialiser):
         raise Exception("Initializer: " + initialiser + " invalid")
         
     # Create parent data holder
-    dataTree = ProjectDataStructure(name=initialiser + ' Topics')
+    dataTree = ProjectDataStructure(name=initialiser + ' Topics', information="root")
     
     # Get all the names of the topics using the active flag
     topicNames = TopicAreas.objects.filter(status=active)
@@ -59,9 +61,9 @@ def approvalDataBuilder(initialiser):
         studies = ResearchProposals.objects.filter(status=active, topic=topic)
         # Add all the questions to the topic
         for question in studies:
-            questions.append(ApprovalInfo(name=question.proposal))
+            questions.append(ApprovalInfo(name=question.proposal, information=question.detail))
         
-        dataSet = ApprovalData(name=topic.topic_area)
+        dataSet = ApprovalData(name=topic.topic_area, information=topic.detail)
         dataSet.children.extend(questions)
 
         # Add to the dataTree
