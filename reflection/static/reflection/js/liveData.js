@@ -50,6 +50,8 @@ function clickLiveChart(d) {
 		 } else {
 			document.getElementById("information").innerHTML = "No Information";
 		 }
+		 updateData.id = d.data.id;
+		 updateData.activated = true;
 	}
 	
   liveChart.transition()
