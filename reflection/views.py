@@ -8,6 +8,7 @@ from . import utilities
 from reflection.proposal import approvalProcessing, AdministrationServices
 from reflection.widgets import businessForms as bForms
 from reflection.proposal import AdminUtilities
+from django.views.decorators.csrf import csrf_protect
 import json
 from django.http import JsonResponse
 
@@ -39,6 +40,15 @@ def adminApprovalDashboard(request):
     return render(request, 'reflection/currentprojectdata.html', {
                                                                   'liveData': liveAdministrationData(),
                                                                   'pendingData': pendingAdministrationData()})
+
+@csrf_protect    
+def updateProjectStatus(request):
+    data_decode = request.body.decode('utf-8')
+    data = json.loads(data_decode)
+    dataId = data['id']
+    dataStatus = data['status']
+    dataType = data['type']
+    return None
 
 def liveAdministrationData():
     live = AdministrationServices.approvalDataBuilder('Live')

@@ -51,7 +51,12 @@ function clickLiveChart(d) {
 			document.getElementById("information").innerHTML = "No Information";
 		 }
 		 updateData.id = d.data.id;
-		 updateData.activated = true;
+		 updateData.status = false;
+		 if (d.hasOwnProperty('children')) {
+			updateData.type = 'Topic';
+		} else {
+			updateData.type = 'Question';
+		}
 	}
 	
   liveChart.transition()

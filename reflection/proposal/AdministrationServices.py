@@ -5,10 +5,13 @@ Created on 20 May 2017
 '''
 from reflection.models import TopicAreas
 from reflection.models import ResearchProposals
+from _ast import Pass
 
 # Attempting to create the admin data using Objects
 
 valididInitializationValues = ['Live', 'Pending']
+typeTopic = 'Topic'
+typeQuestion = 'Question'
         
 class ApprovalData:
     def __init__(self, name, information, dbId):
@@ -73,3 +76,19 @@ def approvalDataBuilder(initialiser):
                     
     return dataTree
     
+    
+def applyUpdateToProjectData(dataId, dataStatus, dataType):
+    #Success status of the update
+    success = True
+    try:
+        if (dataType == typeTopic ):
+            #Update the topic table
+            TopicAreas.objects.filter(id = dataId).update(status = dataStatus)
+            
+        if (dataType == typeQuestion):
+            #Update the question table
+            ResearchProposals.objects.filter(id = dataId).update(status = dataStatus)
+    except(Exception):
+        success = False
+        
+    return success 
