@@ -10,7 +10,7 @@ from reflection.widgets import businessForms as bForms
 from reflection.proposal import AdminUtilities
 from django.views.decorators.csrf import csrf_protect
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse
 
 def home(request):
     # Initialize global data about running projects
@@ -36,19 +36,16 @@ def submitProposal(request):
         return render(request, 'plugins/messageBox.html', {'message':"Failed to submit proposal"})
     
 #Will allow someone to approve topics and questions
+@csrf_protect
 def adminApprovalDashboard(request):
     return render(request, 'reflection/currentprojectdata.html', {
                                                                   'liveData': liveAdministrationData(),
                                                                   'pendingData': pendingAdministrationData()})
-
-@csrf_protect    
 def updateProjectStatus(request):
-    data_decode = request.body.decode('utf-8')
-    data = json.loads(data_decode)
-    dataId = data['id']
-    dataStatus = data['status']
-    dataType = data['type']
-    return None
+    dataId = request.POST['id']
+    dataStatus = request.POST['status']
+    dataType = request.POST['type']
+    return HttpResponse(AdministrationServices.applyUpdateToProjectData(dataId, dataStatus, dataType))
 
 def liveAdministrationData():
     live = AdministrationServices.approvalDataBuilder('Live')

@@ -5,7 +5,6 @@ Created on 20 May 2017
 '''
 from reflection.models import TopicAreas
 from reflection.models import ResearchProposals
-from _ast import Pass
 
 # Attempting to create the admin data using Objects
 
@@ -81,13 +80,13 @@ def applyUpdateToProjectData(dataId, dataStatus, dataType):
     #Success status of the update
     success = True
     try:
-        if (dataType == typeTopic ):
+        if (dataType == typeTopic):
             #Update the topic table
-            TopicAreas.objects.filter(id = dataId).update(status = dataStatus)
+            TopicAreas.objects.filter(id = dataId).update(status = bool(dataStatus))
             
         if (dataType == typeQuestion):
             #Update the question table
-            ResearchProposals.objects.filter(id = dataId).update(status = dataStatus)
+            ResearchProposals.objects.filter(id = dataId).update(status = bool(dataStatus))
     except(Exception):
         success = False
         

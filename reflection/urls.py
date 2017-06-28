@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^reflection/contribute', refl.contribute, name='contribute'),
     url(r'^reflection/genPerGen/',include('genPerGen.urls')),
     url(r'^reflection/admin/', refl.adminApprovalDashboard, name='adminPage'),
+    url(r'^reflection/update/', refl.updateProjectStatus, name='updateData'),
 ]
