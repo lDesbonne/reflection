@@ -106,11 +106,18 @@ def applyUpdateToProjectData(dataId, dataStatus, dataType):
     try:
         if (dataType == typeTopic):
             #Update the topic table
-            TopicAreas.objects.filter(id = dataId).update(status = bool(dataStatus))
+            topic = TopicAreas.objects.filter(id = dataId)
+            topic.update(status = bool(dataStatus))
+            if (not bool(dataStatus)):
+                #Deactivate all associated studies for that topic
+                ResearchProposals.objects.filter(topic = topic.first()).update(status = bool(dataStatus))
             
         if (dataType == typeQuestion):
             #Update the question table
-            ResearchProposals.objects.filter(id = dataId).update(status = bool(dataStatus))
+            proposal = ResearchProposals.objects.filter(id = dataId)
+            proposal.update(status = bool(dataStatus))
+            if (bool(dataStatus) and not proposal.first().topic.status):
+                TopicAreas.objects.filter(id = proposal.first().topic.id).update(status = bool(dataStatus))
     except(Exception):
         success = False
         

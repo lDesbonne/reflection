@@ -51,7 +51,7 @@ function clickPendingChart(d) {
 			document.getElementById("information").innerHTML = "No Information";
 		}
 		updateData.id = d.data.id;
-		updateData.status = true;
+		updateData.status = "T";
 		if (d.hasOwnProperty('children')) {
 			updateData.type = 'Topic';
 		} else {
