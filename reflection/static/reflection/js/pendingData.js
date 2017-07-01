@@ -43,7 +43,7 @@ var pendingChart = d3.select("#PendingData").append("svg")
 })();
 
 function clickPendingChart(d) {
-	if (d.data.detail != "root") {
+	if (d.data.detail != "root" && d.data.select != "False") {
 		document.getElementById("searchData").value = d.data.name;
 		if (d.data.detail) {
 			document.getElementById("information").innerHTML = d.data.detail;
@@ -57,6 +57,8 @@ function clickPendingChart(d) {
 		} else {
 			updateData.type = 'Question';
 		}
+		document.getElementById("activate").disabled = false;
+		document.getElementById("deactivate").disabled = true;
 	}
   
   pendingChart.transition()

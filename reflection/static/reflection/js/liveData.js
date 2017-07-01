@@ -57,6 +57,8 @@ function clickLiveChart(d) {
 		} else {
 			updateData.type = 'Question';
 		}
+		 document.getElementById("deactivate").disabled = false;
+		 document.getElementById("activate").disabled = true;
 	}
 	
   liveChart.transition()
