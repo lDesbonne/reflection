@@ -59,7 +59,7 @@ def breakdown(request):
         return words
     
     # Evaluate whether the words can be submitted to the database
-    numDoc = sqliteData.numberDocs("genPerGen")
+    numDoc = sqliteData.numberDocs()
     if(numDoc < 1000):
         if(data['accurate'] != "noData"):
             if(data['gender'] == "Female"):

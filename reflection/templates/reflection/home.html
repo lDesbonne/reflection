@@ -3,26 +3,29 @@
 <head>
 <meta charset=utf-8>
 <title>Reflection</title>
+<link href="/static/reflection/css/bootstrap.min.css" rel="stylesheet"
+	type="text/css" />
 </head>
 <body>
-<div id='background'>
-<p>Project reflection is an open source project which seeks to answer 
-questions about who we are, and reveal our society's social attitudes.</p>
-</div>
-<div id="studies">
-<h3>Select a study</h3>
-<a href="{% url 'genPerGen:dataIn' %}">Gender Perception of Gender</a>
-</div>
-<div id='moreData'>
-<p>If you would like to submit a question or hypothesis to be added to the study,
-enter it below. If its a unique topic we will endeavour to answer the question</p>
-<a href="/reflection/newResearchConcept/">Propose new research</a>
-<br/>
-<p>Would you like to be a contributor to project Reflection? Click the link below for more details.</p>
-<a href="/reflection/contribute">Tell me more!</a>
-<br>
-<br>
-<a href="/reflection/admin">Administration Page</a>
-</div>
+	<h1 class="text-center">Project Reflection</h1>
+	<div class="row text-center" id="studies">
+		<a href="{% url 'genPerGen:dataIn' %}">Gender Perception of Gender</a>
+	</div>
+	<div class="row" id='moreData'>
+		<div class="col-sm-4 text-center">
+			<p>If you would like to submit a question or hypothesis to be
+				added to the study, enter it below. If its a unique topic we will
+				endeavour to answer the question</p>
+			<a href="/reflection/newResearchConcept/">Propose new research</a>
+		</div>
+		<div class="col-sm-4 text-center">
+			<p>Would you like to be a contributor to project Reflection?
+				Click the link below for more details.</p>
+			<a href="/reflection/contribute">Tell me more!</a>
+		</div>
+		<div class="col-sm-4 text-center">
+			<a href="/reflection/admin">Administration Page</a>
+		</div>
+	</div>
 </body>
 </html>

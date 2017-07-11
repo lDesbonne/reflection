@@ -52,33 +52,38 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					 <label id="searchI" for="searchLive">Search Live Topics</label>
-					 <input type="checkbox" id="searchLive" checked>
+					<label id="searchI" for="searchLive">Search Live Topics</label> <input
+						type="checkbox" id="searchLive" checked>
 				</div>
 				<div class="col-md-6">
-					 <label  for="searchPending">Search Pending Topics</label>
-					 <input type="checkbox" id="searchPending" checked>
+					<label for="searchPending">Search Pending Topics</label> <input
+						type="checkbox" id="searchPending" checked>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-6 actionButton">
-					<button id="activate" value="Activate" onclick="updateProjectData()">
+					<button id="activate" value="Activate"
+						onclick="updateProjectData()">
 						<b>Activate</b>
 					</button>
 				</div>
 				<div class="col-md-6 actionButton">
-					<button id="deactivate" value="Deactivate" onclick="updateProjectData()">
+					<button id="deactivate" value="Deactivate"
+						onclick="updateProjectData()">
 						<b>Deactivate</b>
 					</button>
 				</div>
 			</div>
 			<div class="row actionButton">
-			<button id="done" value="done">Done</button>
+				<form action="{% url 'home' %}">
+					<input type="submit" value="Done">
+				</form>
 			</div>
 		</div>
 	</div>
 	{% csrf_token %};
-	<script src="/static/reflection/js/reflection.js" type="text/javascript"></script>
+	<script src="/static/reflection/js/reflection.js"
+		type="text/javascript"></script>
 	<script src="/static/reflection/js/d3.min.js" type="text/javascript"></script>
 	<script src="/static/reflection/js/jquery-3.1.1.js"
 		type="text/javascript"></script>

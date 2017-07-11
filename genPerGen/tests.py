@@ -1,5 +1,5 @@
 from django.test import TestCase
-from whoAmI.models import Word, ResearchQuery
+from whoAmI.models import Word, Data
 import genPerGen.calculate.naiveAlgo as classify
 import genPerGen.database.dbUtils as util
 import genPerGen.database.sqliteData as sDat
@@ -38,7 +38,7 @@ class WhoAmITest(TestCase):
         Word.objects.create(word='dreamer',cMale=1,cFem=1)
         
         #Add the document type and number of entries to the database
-        ResearchQuery.objects.create(study_title='reflectionStudy_1',num_docs=1)
+        Data.objects.create(study_title='reflectionStudy_1',num_docs=1)
     
     def testClassifyFemale(self):
         #Create unit test to classify a female Document

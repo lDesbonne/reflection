@@ -16,9 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from reflection import views as refl
-from genPerGen.urls import app_name
 
-# TODO add topic area homepages
+app_name = 'reflection'
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^reflection/home',refl.home, name='home'),
