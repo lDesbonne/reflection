@@ -6,11 +6,17 @@ from genPerGen.calculate import naiveAlgo
 from genPerGen.widgets import forms
 from genPerGen.database import dbUtils, sqliteData
 from genPerGen.calculate.analytics import GenPerGenStats
+from reflection.models import ResearchProposals as research
+from genPerGen import models
 import json
 
-
+def studyActive():
+    return research.objects.filter(id = models.STUDY_ID, status = 1).exists()
 
 def predictGender(request):
+    if not studyActive():
+        return None
+    
     # Retrieve the prediction and other info
     wordList = []
     formData = forms.SelfDescribeForm(request.POST)
@@ -38,11 +44,17 @@ def home(request):
     return render(request, 'reflection/home.html')
 
 def dataIn(request):
+    if not studyActive():
+        return None
+    
     descriptionForm = forms.SelfDescribeForm()
     return render(request, 'genPerGen/predInput.html', {'describe':descriptionForm})
 
 @csrf_protect
 def breakdown(request):
+    if not studyActive():
+        return None
+    
     data_decode = request.body.decode('utf-8')
     data = json.loads(data_decode)
     wordsUsed = data['wordlist']
