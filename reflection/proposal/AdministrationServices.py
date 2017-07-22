@@ -122,3 +122,10 @@ def applyUpdateToProjectData(dataId, dataStatus, dataType):
         success = False
         
     return success 
+
+def loadPendingStudies():
+    pendingStudyList = []
+    pendingStudies = ResearchProposals.objects.filter(status = 0)
+    for study in pendingStudies:
+        pendingStudyList.append(str(study.id)+":"+str(study.topic_id))
+    return pendingStudyList

@@ -15,3 +15,12 @@ function updateProjectData() {
 		});
 	}
 }
+
+function removePendingStudies() {
+	for (var i = 0; i < pendingStudies.length; i++) {
+		var researchId = pendingStudies[i];
+		if (document.getElementById(researchId)) {
+			document.getElementById(researchId).setAttribute("class", "collapse");
+		}
+	}
+}

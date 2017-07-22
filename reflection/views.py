@@ -14,9 +14,9 @@ from django.http import HttpResponse
 
 def home(request):
     # Initialize global data about running projects
-    if (not approvalProcessing.initialized):
+    if not approvalProcessing.initialized:
         approvalProcessing.initGlobalData()
-    return render(request,'reflection/home.html')
+    return render(request,'reflection/home.html', {'pendingStudies':AdministrationServices.loadPendingStudies()})
 
 #TODO perhaps remove from here
 def contribute(request):
