@@ -8,7 +8,7 @@ STUDY_ALIAS = "genPerGen"
 ASSOCIATED_STUDY = ResearchProposals.objects.get(id = STUDY_ID)
 
 class Data(models.Model):
-    study_title = models.ForeignKey(ResearchProposals)
+    study_title = models.ForeignKey(ResearchProposals, on_delete=models.CASCADE)
     num_docs = models.IntegerField("number of documents", default=0)
     successes = models.IntegerField("successful classifications", default=0)
     fails = models.IntegerField("false classifications", default=0)
